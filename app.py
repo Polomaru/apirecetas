@@ -11,7 +11,7 @@ db_config = {
     'port': 8005,  # Puerto de la base de datos
     'user': 'root',
     'password': 'utec',
-    'database': 'clinica_db'
+    'database': 'citasdb'
 }
 
 # Función para obtener la conexión a la base de datos
