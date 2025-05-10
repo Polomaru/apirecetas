@@ -1,8 +1,17 @@
 FROM python:3-slim
 
-WORKDIR /programas/api-clinica
+# Instalamos las dependencias del sistema necesarias para mysqlclient
+RUN apt-get update && \
+    apt-get install -y \
+    gcc \
+    libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instalación de dependencias necesarias
+# Establecemos el directorio de trabajo
+WORKDIR /programas/apirecetas
+
+# Instalamos las dependencias de Python
 RUN pip3 install flask flask-mysqldb
 
 # Copia los archivos de tu aplicación al contenedor
