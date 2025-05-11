@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify
 from flasgger import Swagger
 import mysql.connector
 from datetime import datetime
+import pytz
+
+zona_local = pytz.timezone('America/Lima')  # Cambia a tu zona
+hoy = datetime.now(zona_local).strftime('%Y-%m-%d')
 import uuid
 
 app = Flask(__name__)
@@ -197,7 +201,6 @@ def obtener_citas_hoy():
       400:
         description: No hay citas programadas para hoy
     """
-    hoy = datetime.now().strftime('%Y-%m-%d')
     connection = get_db_connection()
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM citas WHERE DATE(fecha_hora) = %s", (hoy,))
