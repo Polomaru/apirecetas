@@ -2,7 +2,7 @@ FROM python:3-slim
 
 WORKDIR /programas/apirecetas
 
-RUN pip3 install flask flasgger mysql-connector-python
+RUN pip3 install flask flasgger mysql-connector-python pytz
 
 COPY . .
 
