@@ -73,26 +73,25 @@ def crear_cita():
         description: Error del servidor
     """
     data = request.get_json()
-    campos = ['idpaciente', 'iddoctor', 'estado', 'motivo']
+    campos = ['idpaciente', 'iddoctor', 'especialidad', 'fecha_hora', 'tipo']
     if not all(c in data for c in campos):
         return jsonify({'error': 'Faltan campos obligatorios'}), 400
 
     idcita = str(uuid.uuid4())
-    fecha_hora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Usar fecha actual
 
     try:
         connection = get_db_connection()
         cursor = connection.cursor()
         cursor.execute("""
-            INSERT INTO citas (idcita, idpaciente, iddoctor, estado, motivo, fecha_hora)
+            INSERT INTO citas (idcita, idpaciente, iddoctor, especialidad, fecha_hora, tipo)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (
             idcita,
             data['idpaciente'],
             data['iddoctor'],
-            data['estado'],
-            data['motivo'],
-            fecha_hora
+            data['especialidad'],
+            data['fecha_hora'],
+            data['tipo']
         ))
         connection.commit()
         cursor.close()
@@ -100,6 +99,7 @@ def crear_cita():
         return jsonify({'message': 'Cita creada correctamente', 'idcita': idcita}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/getcita/<idcita>', methods=['GET'])
 def obtener_cita(idcita):

@@ -1,0 +1,75 @@
+{
+  "info": {
+    "name": "ExamenMedico API",
+    "_postman_id": "abcdef12-3456-7890-abcd-ef1234567890",
+    "description": "Colección de endpoints para la entidad ExamenMedico",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Obtener exámenes por paciente ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/examenes/paciente/12345",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "examenes", "paciente", "12345"]
+        }
+      }
+    },
+    {
+      "name": "Buscar exámenes por paciente, cita y médico",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/examenes/buscar?pacienteId=12345&citaId=67890&medicoId=abcde",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "examenes", "buscar"],
+          "query": [
+            {
+              "key": "pacienteId",
+              "value": "12345"
+            },
+            {
+              "key": "citaId",
+              "value": "67890"
+            },
+            {
+              "key": "medicoId",
+              "value": "abcde"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Crear nuevo examen médico",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pacienteId\": \"12345\",\n  \"medicoId\": \"abcde\",\n  \"citaId\": \"67890\",\n  \"especialidad\": \"Cardiología\",\n  \"fechaSolicitud\": \"2025-05-11T00:00:00Z\",\n  \"fechaRealizacion\": \"2025-05-12T00:00:00Z\",\n  \"diagnostico\": \"Hipertensión\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/examenes",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "examenes"]
+        }
+      }
+    }
+  ]
+}
