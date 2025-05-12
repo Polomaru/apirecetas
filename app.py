@@ -3,12 +3,15 @@ from flasgger import Swagger
 import mysql.connector
 from datetime import datetime
 import pytz
+from flask_cors import CORS
+
 
 zona_local = pytz.timezone('America/Lima')  # Cambia a tu zona
 hoy = datetime.now(zona_local).strftime('%Y-%m-%d')
 import uuid
 
 app = Flask(__name__)
+CORS(app)
 swagger = Swagger(app)
 
 # Configuración de la base de datos
